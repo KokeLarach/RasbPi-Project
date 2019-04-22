@@ -1,0 +1,32 @@
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+public class projectClass
+{
+    public static void main(String args[])
+  {     
+    String s = JOptionPane.showInputDialog("enter string");
+    byte[] bytes = s.getBytes();
+    StringBuilder binary = new StringBuilder();
+    for (byte b : bytes)
+     {
+      int val = b;
+      for (int i = 0; i < 8; i++)
+      {
+        binary.append((val & 128) == 0 ? 0 : 1);
+        val <<= 1;
+      }
+      binary.append(' ');
+     }
+    try 
+    {
+      FileWriter writer = new FileWriter("MyFile.txt", true);
+      System.out.println("'" + s + "' to binary: " + binary.toString());
+      writer.write(binary.toString());
+      writer.close();
+      } catch (IOException e)
+      {
+      e.printStackTrace();   
+     }
+    }
+}
